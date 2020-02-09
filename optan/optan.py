@@ -40,6 +40,11 @@ class _Params:
 
 
 class Optan(argparse.ArgumentParser):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self._params = _Params()
+
     def parse_args(  # type: ignore
         self, args: Optional[Sequence[str]] = None, namespace: argparse.Namespace = None
     ) -> argparse.Namespace:
@@ -52,4 +57,30 @@ class Optan(argparse.ArgumentParser):
         Returns:
             argparse.Namespace: Parsed arguments namespace
         """
-        return super().parse_args(args, namespace)
+        namespace = super().parse_args(args, namespace)
+        self._params.add_params((vars(namespace)), overwrite=False)
+
+        return namespace
+
+    @property
+    def params(self):
+        return self._params.params
+
+    def add_param(self, key: str, value: Any, overwrite: bool = False):
+        """Add parameter.
+
+        Args:
+            key (str): Parameter key
+            value (Any): Parameter value
+            overwrite (bool, optional): Overwrite if key already exists. Defaults to False.
+        """
+        self._params.add_param(key, value, overwrite)
+
+    def add_params(self, params: Dict[str, Any], overwrite: bool = False):
+        """Add parameters.
+
+        Args:
+            params (Dict[str, Any]): Parameters dict
+            overwrite (bool, optional): Overwrite if key already exists. Defaults to False.
+        """
+        self._params.add_params(params, overwrite)
