@@ -1,6 +1,10 @@
 import argparse
 import logging
+import os.path
+from datetime import datetime as dt
 from typing import Any, Dict, Optional, Sequence
+
+import pandas as pd
 
 
 class _Params:
@@ -40,10 +44,16 @@ class _Params:
 
 
 class Optan(argparse.ArgumentParser):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, fmt: str = r"%Y%m%d%H%M%S", *args, **kwargs):
+        """Argument parser.
+
+        Args:
+            fmt (str, optional): Datetime format. Defaults to r"%Y%m%d%H%M%S".
+        """
         super().__init__(*args, **kwargs)
 
         self._params = _Params()
+        self._datetime = dt.now().strftime(fmt)
 
     def parse_args(  # type: ignore
         self, args: Optional[Sequence[str]] = None, namespace: argparse.Namespace = None
@@ -84,3 +94,17 @@ class Optan(argparse.ArgumentParser):
             overwrite (bool, optional): Overwrite if key already exists. Defaults to False.
         """
         self._params.add_params(params, overwrite)
+
+    def write(self, path: str):
+        """Write params to .csv-file.
+
+        Args:
+            path (str): Path to output .csv-file
+        """
+        df = pd.read_csv(path) if os.path.exists(path) else pd.DataFrame()
+
+        series = pd.Series({"#": str(len(df) + 1), "datetime": self._datetime, **self._params.params})
+        df = df.append(series, ignore_index=True)[series.index.to_list()]
+
+        df.to_csv(path, index=False)
+        logging.info("Parameters saved to {}.".format(path))
