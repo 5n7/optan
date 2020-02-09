@@ -6,6 +6,21 @@
 
 <p align="center">Researcher Friendly Argument Parser for Python</p>
 
+<p align="center">
+  <a href="./LICENSE">
+    <img
+      src="https://img.shields.io/github/license/optan-dev/optan"
+      alt="license"
+    />
+  </a>
+  <a href="https://github.com/optan-dev/optan/releases/latest">
+    <img
+      src="https://img.shields.io/github/v/release/optan-dev/optan"
+      alt="release"
+    />
+  </a>
+</p>
+
 ## Install
 
 ```sh
