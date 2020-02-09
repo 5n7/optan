@@ -30,7 +30,7 @@ class _Params:
                     "Key {} already exists. If you want to overwrite, set argument 'overwrite' to 'True'.".format(key)
                 )
         else:
-            self._params[key] = value
+            self._params[key] = str(value)
 
     def add_params(self, params: Dict[str, Any], overwrite: bool = False):
         """Add parameters.
