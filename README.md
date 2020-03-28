@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/optan-dev/optan">
+  <a href="https://github.com/skmatz/optan">
     <img src="./assets/images/banner.png" width="500" alt="banner" />
   </a>
 </p>
@@ -9,13 +9,13 @@
 <p align="center">
   <a href="./LICENSE">
     <img
-      src="https://img.shields.io/github/license/optan-dev/optan"
+      src="https://img.shields.io/github/license/skmatz/optan"
       alt="license"
     />
   </a>
-  <a href="https://github.com/optan-dev/optan/releases/latest">
+  <a href="https://github.com/skmatz/optan/releases/latest">
     <img
-      src="https://img.shields.io/github/v/release/optan-dev/optan"
+      src="https://img.shields.io/github/v/release/skmatz/optan"
       alt="release"
     />
   </a>
@@ -24,7 +24,7 @@
 ## Install
 
 ```sh
-pip install git+https://github.com/optan-dev/optan.git
+pip install git+https://github.com/skmatz/optan.git
 ```
 
 ## Example
